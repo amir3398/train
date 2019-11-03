@@ -2,6 +2,7 @@ package ir.amir3398.train;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -43,7 +44,13 @@ public class MainActivity extends AppCompatActivity {
                         @Override
                         public void onResponse(Call<JsonResponseModel> call, Response<JsonResponseModel> response) {
                             if(response.isSuccessful()){
-
+                                Toast.makeText(MainActivity.this, "Welcome", Toast.LENGTH_SHORT).show();
+                                startActivity(new Intent(MainActivity.this,HomeActivity.class));
+                                MainActivity.this.finish();
+                            }else if(response.code()==406) {
+                                Toast.makeText(MainActivity.this, "Wrong Password", Toast.LENGTH_SHORT).show();
+                                pass.setText("");
+                                pass.requestFocus();
                             }else
                                 Toast.makeText(MainActivity.this, "Error", Toast.LENGTH_SHORT).show();
                         }
