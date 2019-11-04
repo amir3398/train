@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import ir.amir3398.train.data.RetrofitClient;
 import ir.amir3398.train.model.JsonResponseModel;
+import ir.amir3398.train.myClass.mySharedPrefrence;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -24,6 +25,12 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        if(!mySharedPrefrence.getInstance(this).getUsername().equals(""))
+        {
+            startActivity(new Intent(MainActivity.this,HomeActivity.class));
+            MainActivity.this.finish();
+        }
         init();
     }
 
@@ -45,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
                         public void onResponse(Call<JsonResponseModel> call, Response<JsonResponseModel> response) {
                             if(response.isSuccessful()){
                                 Toast.makeText(MainActivity.this, "Welcome", Toast.LENGTH_SHORT).show();
+                                mySharedPrefrence.getInstance(MainActivity.this).setUsername(u);
                                 startActivity(new Intent(MainActivity.this,HomeActivity.class));
                                 MainActivity.this.finish();
                             }else if(response.code()==406) {
