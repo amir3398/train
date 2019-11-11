@@ -29,4 +29,14 @@ public class mySharedPrefrence {
     public void clearSharedPrefrence(){
         sp.edit().clear().apply();
     }
+
+
+    public void setPermission(){
+        sp.edit().putBoolean("isPer",true).apply();
+    }
+    public boolean getPermission(){
+        return sp.getBoolean("isPer",false);
+    }
+
+
 }
