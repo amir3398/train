@@ -38,5 +38,11 @@ public class mySharedPrefrence {
         return sp.getBoolean("isPer",false);
     }
 
+    public void setUri(String uri){
+        sp.edit().putString("isUri",uri).apply();
+    }
+    public String getUri(){
+        return sp.getString("isUri","");
+    }
 
 }
